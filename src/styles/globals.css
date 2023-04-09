@@ -2,26 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+html {
+  font-size: 14px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.btn {
+  background-color: beige;
+  padding: 1em 2.5em;
+  border-radius: 2em;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard {
+  margin: 0 auto;
+  width: 80%;
+  min-height: 400px;
+  background-color: aquamarine;
+
+  display: flex;
+}
+
+.info-box {
+  padding: 1em;
+  background-color: rgb(145, 145, 217);
+  border-radius: 1em;
+  margin: 0 0 1em 0;
+  width: 50%;
+}
+
+.side-col {
+  background-color: bisque;
+  width: 25%;
+}
+
+.main-col {
+  width: 50%;
+}
+
+.col-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 0 1em 0;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 775px) {
+  .dashboard {
+    flex-direction: column;
+    color: red;
+    flex-wrap: nowrap;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  .side-col {
+    width: 100%;
+  }
+
+  .main-col {
+    width: 100%;
+  }
+
+  .dashboard > div:not(:last-child) {
+    margin: 0 0 2em 0;
+  }
 }
