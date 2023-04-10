@@ -34,7 +34,7 @@ const useBartering = () => {
       setMerchantMoney((prev) => prev + item.price);
       setPlayerMoney((prev) => prev - item.price);
     } else {
-      alert("you cannot purchase that");
+      alert("You do not have enough money to purchase that");
     }
   };
 
@@ -47,7 +47,7 @@ const useBartering = () => {
       setPlayerMoney((prev) => prev + item.price);
       setMerchantMoney((prev) => prev - item.price);
     } else {
-      alert("you cannot purchase that");
+      alert("The merchant does not have enough money to purchase that");
     }
   };
 
