@@ -6,13 +6,21 @@ html {
   font-size: 14px;
 }
 
+h2,
 h3 {
-  font-size: 1.25rem;
   font-weight: bold;
 }
 
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
 .btn {
-  background-color: beige;
+  background-color: #ae8799;
   padding: 1em 2.5em;
   border-radius: 2em;
 }
@@ -25,15 +33,24 @@ main {
 
   justify-content: center;
   align-items: center;
+
+  background-image: url("../../public/egypt.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .dashboard {
   margin: 0 auto;
   width: 80%;
   min-height: 400px;
-  background-color: aquamarine;
+  background-color: #ffa737;
 
+  opacity: 0.9;
   display: flex;
+  padding: 1em;
+  border-radius: 1em;
 }
 
 .info-box {
@@ -47,18 +64,60 @@ main {
 .side-col {
   background-color: bisque;
   width: 25%;
+  border-radius: 2em;
+  padding: 0 1em;
 }
 
 .main-col {
   width: 50%;
+  padding: 0 1em;
 }
 
 .col-header {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   margin: 0 0 1em 0;
+}
+
+.col-header-title {
+  margin-bottom: 1em;
+}
+
+.ware-item-container {
+  display: flex;
+  margin: 0 0 1em 0;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 2;
+}
+
+.ware-item-btn {
+  color: aliceblue;
+  background-color: black;
+  margin: 0 1em;
+  padding: 0.2em 0.4em;
+  border-radius: 1em;
+  line-height: 0.4;
+}
+
+.wares-container {
   flex-wrap: wrap;
+}
+
+table {
+  table-layout: auto;
+}
+
+.end-game-button {
+  background-color: #ae8799;
+  padding: 1em 2em;
+  border-radius: 2em;
+}
+
+.end-col-body {
+  text-align: center;
 }
 
 @media (max-width: 775px) {

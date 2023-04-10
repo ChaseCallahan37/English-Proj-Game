@@ -1,148 +1,79 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 import InfoBox from "@/components/InfoBox";
 import WaresContainer from "@/components/WaresContainer";
-import Item from "@/class/Item";
+import useBartering from "../hooks/useBartering";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const maxPurchasables = 7;
-
-const possibleItems = [
-  new Item({ title: "Spices of the East", min: 80, max: 120 }),
-  new Item({ title: "Silk Scarves", min: 80, max: 120 }),
-  new Item({ title: "Exotic Animal Hides", min: 80, max: 120 }),
-  new Item({ title: "Precious Gemstones", min: 80, max: 120 }),
-  new Item({ title: "Antique Pottery", min: 80, max: 120 }),
-  new Item({ title: "Rare Artifacts", min: 80, max: 120 }),
-  new Item({ title: "Handmade Rugs", min: 80, max: 120 }),
-  new Item({ title: "Spices of the East", min: 80, max: 120 }),
-  new Item({ title: "Spices of the East", min: 80, max: 120 }),
-  new Item({ title: "Spices of the East", min: 80, max: 120 }),
-  new Item({ title: "Spices of the East", min: 80, max: 120 }),
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  "Fine Wines",
-  "Enchanted Jewelry",
-  "Handcrafted Musical Instruments",
-  "Exotic Teas",
-  "Rare Books",
-  "Handmade Leather Goods",
-  "Exquisite Oil Paintings",
-  "Ancient Maps",
-  "Ceremonial Masks",
-  "Mysterious Art Objects",
-  "Rare Spices",
-  "Exotic Perfumes",
-];
-
-const wares = [
-  {
-    title: "Camel Bag",
-    value: 0,
-  },
-  {
-    title: "Canteen",
-    value: 0,
-  },
-  {
-    title: "Sword",
-    value: 0,
-  },
-];
-
-const availableWares = [
-  {
-    title: "Camel Bag",
-    value: 0,
-  },
-  {
-    title: "Canteen",
-    value: 0,
-  },
-  {
-    title: "Sword",
-    value: 0,
-  },
-];
+const winCondition = 1500;
 
 export default function Home() {
-  const [money, setMoney] = useState(0);
   const [day, setDay] = useState(0);
-  const [availableWares, setAvailableWares] = useState([
-    {
-      title: "Camel Bag",
-      value: 0,
-    },
-    {
-      title: "Canteen",
-      value: 0,
-    },
-    {
-      title: "Sword",
-      value: 0,
-    },
-  ]);
-  const [playerWares, setPlayerWares] = useState([
-    {
-      title: "Camel Bag",
-    },
-    {
-      title: "Canteen",
-    },
-    {
-      title: "Sword",
-    },
-  ]);
+  const {
+    merchantInventory,
+    playerInventory,
+    purchaseItem,
+    sellItem,
+    resetDay,
+    playerMoney,
+    merchantMoney,
+  } = useBartering();
 
-  const handleNewDay = () => {
-    const randNum = Math.ceil(Math.random() * maxPurchasables);
-    const numNewItems = randNum > 7 ? randNum / 2 : randNum;
-    const newInventory = [];
-    for (let i = 0; i < numNewItems; i++) {
-      newInventory.push(() => {
-        const newItem = new Item();
-      });
-    }
-  };
+  //Gets a random number of items to have for the next day, based off of max number
+  //Then adds that number of randomly chosen items to the new inventory array
 
   useEffect(() => {
-    handleNewDay();
+    resetDay();
   }, [day]);
+
+  useEffect(() => {
+    resetDay();
+  }, []);
 
   return (
     <main className="">
       <div className="dashboard">
         <div className="side-col">
           <div className="col-header">
-            <InfoBox day={day} money={money} />
+            <h2 className="col-header-title">Player Info</h2>
+            <InfoBox day={day} money={playerMoney} />
             <button onClick={() => setDay(day + 1)} className="btn">
               Next Day
             </button>
           </div>
-          <WaresContainer wares={playerWares}>
+          <WaresContainer onWareSelect={sellItem} wares={playerInventory}>
             <h3>Your Wares:</h3>
           </WaresContainer>
         </div>
         <div className="main-col">
           <div className="col-header">
-            <p>1</p>
-            <p>2</p>
-            <p>3</p>
+            <h2>Visiting Merchant</h2>
           </div>
-          <WaresContainer wares={availableWares}>
+          <p>Merchant Money: ${merchantMoney}</p>
+          <WaresContainer wares={merchantInventory} onWareSelect={purchaseItem}>
             <h3>Available Wares:</h3>
           </WaresContainer>
         </div>
-        <div className="side-col">
+        <div className="side-col end-col">
           <div className="col-header">
-            <h2>Map</h2>
+            <h2 className="col-header-title">Go Home</h2>
+            <p>
+              In order to beat the game and go home, you must make{" "}
+              <strong>${winCondition}</strong> to be recognized by the King of
+              Egypt.
+            </p>
+          </div>
+          <div className="end-col-body">
+            <button
+              onClick={() => {
+                if (playerMoney >= 1500) alert("Congratulations, you win!!");
+                else alert("You do not have enough to win yet");
+              }}
+              className="end-game-button"
+            >
+              Earn Recognition
+            </button>
           </div>
         </div>
       </div>
