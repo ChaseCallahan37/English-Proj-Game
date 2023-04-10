@@ -20,7 +20,7 @@ const possibleItems = [
 
 const useBartering = () => {
   const [playerInventory, setPlayerInventory] = useState([]);
-  const [playerMoney, setPlayerMoney] = useState(3000);
+  const [playerMoney, setPlayerMoney] = useState(300);
 
   const [merchantInventory, setMerchantInventory] = useState([]);
   const [merchantMoney, setMerchantMoney] = useState(0);
